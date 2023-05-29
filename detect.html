@@ -1,0 +1,257 @@
+<html>
+    <head>
+        <title></title>
+        <script defer src="face-api.min.js"></script>
+    <script defer src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .main{
+                background: linear-gradient(#00000095, #00000095), url("back.jpg");
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                font-family: poppins;
+            }
+
+            .main .container{
+                background-color: #fff;
+            }
+
+            .container .heading{
+                padding: 20px;
+                background-color: #A9907E20;
+                color: #00000090;
+            }
+
+            .main .container .cont{
+                
+                width: 100%;
+                height: 80vh;
+                display: flex;
+                justify-content: space-around;
+                padding: 10px 250px;
+                padding-bottom: -150px;
+                box-sizing: border-box;
+                color: #000 !important;
+            }
+
+            .main-cont{
+                background-color: #A9907E20;
+            }
+
+            .cont p{
+                color: #000;
+                font-size: 18px;
+            }
+
+            .left{
+                width: 60%;
+                text-align: left;
+                box-sizing: border-box;
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 10px;
+                text-align: center;
+                height: 500px;
+            }
+
+
+            .left .detector{
+                width: 100%;
+                 height: 200px;
+            }
+
+            .left .detector video{
+                width: 100%;
+            }
+
+            .line{
+                border: 1px solid #f2f2f2;
+            }
+
+            .right{
+                width: 30%;
+                height: 330px;
+                text-align: left;
+                box-sizing: border-box;
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 10px;
+                text-align: center;
+
+            }
+
+            .right h4{
+                font-size: 150px;
+                text-align: center;
+                margin-top: -20px;
+            }
+
+            .right h1{
+                margin-top: -30px;
+            }
+
+
+            hr{
+                border: 1px solid #A9907E40;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+
+            .main a{
+                text-decoration: none;
+                color: #fff;
+                font-family: poppins;
+                padding: 10px 20px !important;
+                margin-top: 10px;
+                opacity: 0.5;
+                font-weight: 100;
+                transition: all 0.5s ease;
+                border-radius: 5px;
+            }
+
+            .main a:hover{
+                background-color: #ffffff10;
+                opacity: 1;
+            
+            }
+
+            .btn{
+                background-color: #ffffff !important;
+                color: #000 !important;
+                opacity: 1 !important;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+            }
+
+            .main .login button:hover{
+                background-color: #b8a394;
+            }
+
+            .updateBtn{
+                background-color: #A9907E;
+                color: #fff;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+                margin-top: 15px;
+            }
+
+            .sugestMsg{
+                background-color: #A9907E20;
+                padding: 20px;
+                text-align: left;
+                
+                padding: 5px 270px;
+            }
+
+            #msg1{
+                padding-top: 80px;
+            }
+
+            @keyframes wordAnimation {
+  0% { opacity: 0; transform: translateX(-20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.word-animation {
+  opacity: 0;
+  animation: wordAnimation 0.5s forwards;
+}
+
+
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div style="padding: 20px">
+                <a href="user.html">Home</a>
+                <a href="memes.html">Memes</a>
+                <a href="detect.html">Detect Mood</a>
+                <a href="userlist.html" class="a">User List</a>
+                <a class="btn" onclick="logout()">Logout</a>
+
+            </div>
+            <div class="container">
+                <h1 class="heading" id="mainName">Welcome User</h1>
+                <div class="main-cont">
+                <div class="cont">
+                    <div class="left">
+                        <div class="detector">
+                            <video id="video" width="600" height="350" autoplay muted></video>
+                        </div>
+                        <h2 id="sc"></h2>
+                        <button onclick="getthe()"class="updateBtn" style="margin-top: 190px;" >Click me</button>
+                        
+                    </div>
+                    <div class="right">
+                        <div>
+                            <p>Your Happify Coins</p>
+                        <hr class="line">
+                        <h4>🪙</h4>
+                        <h1 id="coin"></h1>
+                        </div>
+
+                        
+                    </div>
+
+                    
+
+                    
+                </div>
+
+                <div class="right" style="width: 615px; height: 350px; margin-left: 275px; margin-top: -40px;">
+                    <div class="myinfo">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+                
+
+                <p class="sugestMsg" id="msg1"></p>
+                <p class="sugestMsg" id="msg2"></p>
+                <p class="sugestMsg" id="msg3"></p>
+            </div>
+
+           
+        </div>
+
+
+        <script>
+
+            
+
+            
+
+        //    let mainName = document.getElementById("mainName").innerHTML = "Welcome " + currentUser.uname;
+
+   
+
+
+           const logout = () => {
+            localStorage.setItem('session', null)
+            alert("Logout Successfully")
+            location.replace("login.html")
+           }
+
+
+
+
+        </script>
+    </body>
+</html>

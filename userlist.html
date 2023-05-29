@@ -1,0 +1,230 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+
+            body{
+                background-color: #A9907E50;
+            }
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .main{
+                background: linear-gradient(#00000095, #00000095), url("back.jpg");
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                font-family: poppins;
+            }
+
+            .main h1{
+                color: #fff;
+                font-family: poppins;
+                text-align: center;
+                padding-top: 150px;
+                font-size: 40px;
+            }
+
+            .main button{
+                background-color: #fff;
+                color: #000;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+            }
+
+            .main p{
+                color: #fff;
+                font-family: poppins;
+                font-weight: 100;
+                padding: 20px;
+            }
+
+            .main a{
+                text-decoration: none;
+                color: #fff;
+                font-family: poppins;
+                padding: 10px 20px !important;
+                margin-top: 10px;
+                opacity: 0.5;
+                font-weight: 100;
+                transition: all 0.5s ease;
+                border-radius: 5px;
+            }
+
+            .main a:hover{
+                background-color: #ffffff10;
+                opacity: 1;
+            
+            }
+
+            .main .login{
+                background-color: #fff;
+                width: 450px;
+                padding: 30px;
+                border-radius: 10px;
+                margin: auto;
+                margin-top: 100px;
+                padding-bottom: 80px;
+            }
+
+            .main .login input, .main .login select{
+                width: 100%;
+                padding: 10px;
+                border: none;
+                font-family: poppins;
+                margin-top: 5px;
+                border-bottom: 2px solid #f2f2f2;
+                transition: 0.5s ease;
+                outline: none;
+                font-size: 15px;
+                
+            }
+
+            .main .login input:hover{
+                border-bottom: 2px solid #A9907E;
+            }
+
+            .main .login button{
+                background-color: #A9907E;
+                color: #fff;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+                float: right;
+                margin-top: 15px;
+            }
+
+            .main .login button:hover{
+                background-color: #b8a394;
+            }
+
+            .btn{
+                background-color: #ffffff !important;
+                color: #000 !important;
+                opacity: 1 !important;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+            }
+
+            .container{
+                background-color: #fff;
+                width: 100%;
+                height: 100vh;
+                
+            }
+
+            .cont{
+                background-color: #A9907E20;
+                height: 100vh;
+                padding-top: 30px;
+            }
+
+            .users{
+                background-color: #fff;
+                width: 550px;
+                
+                border-radius: 10px;
+                margin: auto;
+                display: flex;
+                justify-content: space-between;
+                text-align: left;
+                color: #000;
+                padding-right: 50px;
+                box-sizing: border-box;
+               
+            }
+
+            .users p{
+                color: #000 !important;
+            }
+
+            .users img{
+                width: 50px;
+                border-radius: 50%;
+                margin: 10px;
+                text-align: left;
+                position: absolute;
+                left: 580;
+            }
+
+            .users h3{
+                background-color: #A9907E50;
+                line-height: 60px;
+                padding: 0px 30px;
+                margin: 5px;
+                border-radius: 10px;
+            }
+
+            
+
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div style="padding: 20px">
+                <a href="index.html">Home</a>
+                <a href="memes.html">Memes</a>
+                <a href="userlist.html" class="a">User List</a>
+                
+
+            </div>
+            <div class="container">
+                
+                <div class="cont" id="u">
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+
+
+        <script>
+
+            let session = localStorage.getItem('session')
+            const users = JSON.parse(localStorage.getItem("users"))
+           
+           let currentUser;
+           let count = 0;
+
+           const sexPred = (s) => {
+            if(s=='male'){
+                return 'boy1.png'
+            }else{
+                return 'girl1.png'
+            }
+           }
+
+           let newUsers = users.sort((a, b) => b.ucoins - a.ucoins);
+           
+               let u = newUsers.map((e) => {
+               
+                return `
+                <div class="users">
+                        <h3>${count++}</h3>
+                        <img src="${sexPred(e.usex)}" />
+                        <p>${e.uname}</p>
+                        <p>🪙${e.ucoins}</p>
+                    </div>
+                `
+               })
+
+               document.getElementById('u').innerHTML = u;
+
+        </script>
+    </body>
+</html>

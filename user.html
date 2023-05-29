@@ -1,0 +1,242 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .main{
+                background: linear-gradient(#00000095, #00000095), url("back.jpg");
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                font-family: poppins;
+            }
+
+            .main .container{
+                background-color: #fff;
+            }
+
+            .container .heading{
+                padding: 20px;
+                background-color: #A9907E20;
+                color: #00000090;
+            }
+
+            .main .container .cont{
+                background-color: #A9907E20;
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                justify-content: space-around;
+                padding: 10px 250px;
+                box-sizing: border-box;
+                color: #000 !important;
+            }
+
+            .cont p{
+                color: #000;
+                font-size: 18px;
+            }
+
+            .left{
+                width: 60%;
+                text-align: left;
+                box-sizing: border-box;
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 10px;
+                text-align: center;
+                height: 570px;
+            }
+
+
+            .left img{
+                border-radius: 50%;
+                width: 150px;
+                margin-bottom: 30px;
+            }
+
+            .line{
+                border: 1px solid #f2f2f2;
+            }
+
+            .right{
+                width: 30%;
+                height: 330px;
+                text-align: left;
+                box-sizing: border-box;
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 10px;
+                text-align: center;
+
+            }
+
+            .right h4{
+                font-size: 150px;
+                text-align: center;
+                margin-top: -20px;
+            }
+
+            .right h1{
+                margin-top: -30px;
+            }
+
+
+            hr{
+                border: 1px solid #A9907E40;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+
+            .main a{
+                text-decoration: none;
+                color: #fff;
+                font-family: poppins;
+                padding: 10px 20px !important;
+                margin-top: 10px;
+                opacity: 0.5;
+                font-weight: 100;
+                transition: all 0.5s ease;
+                border-radius: 5px;
+            }
+
+            .main a:hover{
+                background-color: #ffffff10;
+                opacity: 1;
+            
+            }
+
+            .btn{
+                background-color: #ffffff !important;
+                color: #000 !important;
+                opacity: 1 !important;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+            }
+
+            .main .login button:hover{
+                background-color: #b8a394;
+            }
+
+            .updateBtn{
+                background-color: #A9907E;
+                color: #fff;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+                margin-top: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div style="padding: 20px">
+                <a href="user.html">Home</a>
+                <a href="memes.html">Memes</a>
+                <a href="userlist.html" class="a">User List</a>
+                <a href="detect.html">Detect Mood</a>
+                <a class="btn" href="#" onclick="logout()">Logout</a>
+
+            </div>
+            <div class="container">
+                <h1 class="heading" id="mainName">Welcome User</h1>
+                <div class="cont">
+                    <div class="left">
+                        <img id="profileImg" src="boy1.png">
+                        
+                       
+                        <div style="text-align: left;" >
+                            <p>Name: <span id="name">Om BHagwat</span></p>
+                            <hr class="line">
+                            <p>Email: <span id="email">om@123.com</span></p>
+                            <hr class="line">
+                            <p>Age: <span id="age">20</span></p>
+                            <hr class="line">
+                            <p>Date of Birth: <span id="age">20/01/2003</span></p>
+                            <hr class="line">
+                            <p>Mob: <span id="mob">9403343871</span></p>
+                            <hr class="line">
+                            <p>Gender: <span id="sex">Male</span></p>
+                            <a href="update.html"><button class="updateBtn">Update</button></a>
+                        </div>
+                        
+                    </div>
+                    <div class="right">
+                        <p>Your Happify Coins</p>
+                        <hr class="line">
+                        <h4>🪙</h4>
+                        <h1 id="coin">90</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+
+            let session = localStorage.getItem('session');
+            const users = JSON.parse(localStorage.getItem("users"))
+
+            let currentUser;
+           
+            if(session){
+               console.log(session)
+               users.map((e) => {
+                if(session == e.uemail){
+                    currentUser = e;
+                }
+               })
+           }else{
+            alert("Please login again")
+           }
+
+           const sexPred = (s) => {
+            if(s=='male'){
+                return 'boy1.png'
+            }else{
+                return 'girl1.png'
+            }
+           }
+
+        
+
+           document.getElementById("profileImg").src=sexPred(currentUser.usex);
+
+           let mainName = document.getElementById("mainName").innerHTML = "Welcome " + currentUser.uname;
+
+           let name = document.getElementById("name").innerHTML = currentUser.uname;
+           let email = document.getElementById("email").innerHTML = currentUser.uemail;
+           let age = document.getElementById("age").innerHTML = currentUser.uage;
+           let mob = document.getElementById("mob").innerHTML = currentUser.umob;
+           let sex = document.getElementById("sex").innerHTML = currentUser.usex;
+
+           let coins = document.getElementById("coin").innerHTML = currentUser.ucoins;
+
+
+
+
+           const logout = () => {
+            localStorage.setItem('session', null)
+            alert("Logout Successfully")
+            location.replace("login.html")
+           }
+
+
+
+
+        </script>
+    </body>
+</html>

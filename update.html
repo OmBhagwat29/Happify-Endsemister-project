@@ -1,0 +1,237 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .main{
+                background: linear-gradient(#00000095, #00000095), url("back.jpg");
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                font-family: poppins;
+            }
+
+            .main h1{
+                color: #fff;
+                font-family: poppins;
+                text-align: center;
+                padding-top: 150px;
+                font-size: 40px;
+            }
+
+            .main button{
+                background-color: #fff;
+                color: #000;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+            }
+
+            .main p{
+                color: #fff;
+                font-family: poppins;
+                font-weight: 100;
+                padding: 20px;
+            }
+
+            .main a{
+                text-decoration: none;
+                color: #fff;
+                font-family: poppins;
+                padding: 10px 20px !important;
+                margin-top: 10px;
+                opacity: 0.5;
+                font-weight: 100;
+                transition: all 0.5s ease;
+                border-radius: 5px;
+            }
+
+            .main a:hover{
+                background-color: #ffffff10;
+                opacity: 1;
+            
+            }
+
+            .main .login{
+                background-color: #fff;
+                width: 450px;
+                padding: 30px;
+                border-radius: 10px;
+                margin: auto;
+                margin-top: 100px;
+                padding-bottom: 80px;
+            }
+
+            .main .login input, .main .login select{
+                width: 100%;
+                padding: 10px;
+                border: none;
+                font-family: poppins;
+                margin-top: 5px;
+                border-bottom: 2px solid #f2f2f2;
+                transition: 0.5s ease;
+                outline: none;
+                font-size: 15px;
+                
+            }
+
+            .main .login input:hover{
+                border-bottom: 2px solid #A9907E;
+            }
+
+            .main .login button{
+                background-color: #A9907E;
+                color: #fff;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+                float: right;
+                margin-top: 15px;
+            }
+
+            .main .login button:hover{
+                background-color: #b8a394;
+            }
+
+            .btn{
+                background-color: #ffffff !important;
+                color: #000 !important;
+                opacity: 1 !important;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+            }
+
+            .container{
+                background-color: #fff;
+                width: 100%;
+                height: 100vh;
+                
+            }
+
+            .cont{
+                background-color: #A9907E20;
+                height: 100vh;
+                padding-top: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div style="padding: 20px">
+                <a href="user.html">Home</a>
+                <a href="memes.html">Memes</a>
+                <a href="detect.html">Detect Mood</a>
+                <a class="btn" href="#" onclick="logout()">Logout</a>
+
+            </div>
+            <div class="container">
+                <div class="cont">
+                    <div class="login">
+                        <h2>Update Information</h2>
+                        <input type="text" placeholder="Enter Name" id="name">
+                        <input type="text" placeholder="Enter Mob" id="mob">
+                        <input type="date" placeholder="Enter Date of Birth" id="dob">
+                        <input type="number" placeholder="Enter Age" id="age">
+                        <select id="sex">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        
+                        <button onclick="update()">Update</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <script>
+
+            let session = localStorage.getItem('session')
+            const users = JSON.parse(localStorage.getItem("users"))
+           
+           let currentUser;
+           
+               users.map((e) => {
+                if(session == e.uemail){
+                    currentUser = e;
+                }
+               })
+
+               document.getElementById('name').value = currentUser.uname;
+               document.getElementById('age').value = currentUser.uage;
+               document.getElementById('dob').value = currentUser.udob;
+               document.getElementById('sex').value = currentUser.usex;
+               document.getElementById('mob').value = currentUser.umob;
+
+
+
+
+
+            const update = () => {
+
+                let name = document.getElementById('name').value;
+                let age = document.getElementById('age').value;
+                let dob = document.getElementById('dob').value;
+                let sex = document.getElementById('sex').value;
+                let mob = document.getElementById('mob').value;
+
+                
+                
+
+                users.map((e) => {
+                if(session == e.uemail){
+                    e.uname=name;
+                    e.uage=age;
+                    e.udob=dob;
+                    e.usex=sex;
+                    e.umob=mob
+                }
+               })
+
+               localStorage.setItem("users", JSON.stringify(users))
+               alert("Information Updated Successfully")
+               location.replace("user.html")
+
+                
+
+
+                
+
+                // let isPresent = false;
+
+                // users.map((e) => {
+                //     if(e.uemail == email && e.upass == pass){
+                //         isPresent = true;
+                //     }
+                // })
+
+                // if(isPresent){
+                //     localStorage.setItem("session", email)
+                //     alert("User Login Successfully")
+                //     location.replace("user.html")
+                // }else{
+                //     alert("User Not Found")
+                // }
+
+
+                
+            }
+        </script>
+    </body>
+</html>

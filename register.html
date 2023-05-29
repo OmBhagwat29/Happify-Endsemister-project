@@ -1,0 +1,176 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .main{
+                background: linear-gradient(#00000095, #00000095), url("back.jpg");
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                width: 100%;
+                height: 100vh;
+                text-align: center;
+                font-family: poppins;
+            }
+
+            .main h1{
+                color: #fff;
+                font-family: poppins;
+                text-align: center;
+                padding-top: 150px;
+                font-size: 40px;
+            }
+
+            .main button{
+                background-color: #fff;
+                color: #000;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+            }
+
+            .main p{
+                color: #fff;
+                font-family: poppins;
+                font-weight: 100;
+                padding: 20px;
+            }
+
+            .main a{
+                text-decoration: none;
+                color: #fff;
+                font-family: poppins;
+                padding: 10px 20px !important;
+                margin-top: 10px;
+                opacity: 0.5;
+                font-weight: 100;
+                transition: all 0.5s ease;
+                border-radius: 5px;
+            }
+
+            .main a:hover{
+                background-color: #ffffff10;
+                opacity: 1;
+            
+            }
+
+            .main .login{
+                background-color: #fff;
+                width: 450px;
+                padding: 30px;
+                border-radius: 10px;
+                margin: auto;
+                margin-top: 100px;
+                padding-bottom: 80px;
+            }
+
+            .main .login input{
+                width: 100%;
+                padding: 10px;
+                border: none;
+                font-family: poppins;
+                margin-top: 5px;
+                border-bottom: 2px solid #f2f2f2;
+                transition: 0.5s ease;
+                outline: none;
+                font-size: 15px;
+                
+            }
+
+            .main .login input:hover{
+                border-bottom: 2px solid #A9907E;
+            }
+
+            .main .login button{
+                background-color: #A9907E;
+                color: #fff;
+                font-family: poppins;
+                padding: 10px 30px;
+                border-radius: 30px;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+                float: right;
+                margin-top: 15px;
+            }
+
+            .main .login button:hover{
+                background-color: #b8a394;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div style="padding: 20px">
+                <a href="#">Home</a>
+                <a href="register.html">Register</a>
+                <a href="login.html">Login</a>
+            </div>
+            <div class="login">
+                <h2>Register</h2>
+                <input type="text" placeholder="Enter Name" id="name">
+                <input type="text" placeholder="Enter Email" id="email">
+                <input type="number" placeholder="Enter Mobile" id="mob">
+                <input type="password" placeholder="Enter Password" id="pass">
+                <button onclick="register()">Register</button>
+            </div>
+        </div>
+rr
+
+
+
+        <script>
+
+//  localStorage.setItem("users", "[]")
+//             localStorage.setItem("session", "null")
+            
+           
+            const register = () => {
+
+                let name = document.getElementById('name').value;
+                let email = document.getElementById('email').value;
+                let mob = document.getElementById('mob').value;
+                let pass = document.getElementById('pass').value;
+
+           
+
+                const user = {
+                    uname: name,
+                    uemail: email,
+                    umob: mob,
+                    upass: pass,
+                    uage: null,
+                    udob: null,
+                    usex: null,
+                    ucoins: 0,
+                }
+
+                const users = JSON.parse(localStorage.getItem("users"))
+
+                let isPresent = false;
+
+                users.map((e) => {
+                    if(e.uemail == email){
+                        isPresent = true;
+                    }
+                })
+
+                if(isPresent){
+                    alert("user is Already Present")
+                }else{
+                    users.push(user)
+                    localStorage.setItem("users", JSON.stringify(users))
+                    alert("User Registeres Successfully")
+                    location.replace("login.html")
+                }
+
+            }
+        </script>
+    </body>
+</html>
